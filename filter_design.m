@@ -31,7 +31,7 @@ c_opt = 1e-6;
 % ----------------------
 % s^2  + 2*alpha*s + w^2
 
-dig_resistor = linspace(0, 10e3, 128);
+dig_resistor = linspace(0, 10e3, 64);
 c_opt = 1e-6;
 
 w = 1./(2*pi*dig_resistor*c_opt);
@@ -42,7 +42,7 @@ alpha = 2./(c_opt*dig_resistor);
 % ----------------------
 % s^2  + (w/Q)*s + w^2
 
-dig_resistor = linspace(0, 10e3, 128);
+dig_resistor = linspace(0, 10e3, 64);
 c_opt = 1e-6;
 
 w = 1./(2*pi*dig_resistor*c_opt);
