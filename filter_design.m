@@ -34,8 +34,8 @@ c_opt = 1e-6;
 dig_resistor = linspace(0, 10e3, 128);
 c_opt = 1e-6;
 
-w = 1/(2*pi*dig_resistor*c_opt);
-alpha = 2/(c_opt*dig_resistor); 
+w = 1./(2*pi*dig_resistor*c_opt);
+alpha = 2./(c_opt*dig_resistor); 
 
 %% HPF System (2nd order system)
 %         s^2
@@ -45,5 +45,5 @@ alpha = 2/(c_opt*dig_resistor);
 dig_resistor = linspace(0, 10e3, 128);
 c_opt = 1e-6;
 
-w = 1/(2*pi*dig_resistor*c_opt);
+w = 1./(2*pi*dig_resistor*c_opt);
 Q = 0.5; % predetermined
