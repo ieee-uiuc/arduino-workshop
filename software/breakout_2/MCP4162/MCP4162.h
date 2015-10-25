@@ -1,4 +1,4 @@
-/**
+/*
  * MCP4162 Arduino Library
  * Kashev Dalmia - kashev.dalmia@gmail.com
  *
@@ -10,7 +10,8 @@
 #ifndef MCP4162_H
 #define MCP4162_H
 
-#include "SPI.h"
+#include <Arduino.h>
+#include <SPI.h>
 
 /**
  * Controller for a Microchip MCP4162 single digital rheostat, controllable via
@@ -29,16 +30,14 @@ class MCP4162
 {
 public:
     MCP4162(uint8_t slave_select_pin, bool manage_SPI_bus=false);
-    ~MCP4162();
 
-    void init(bool init_SPI=false);
-    void write(uint8_t val);
-
+    void init();
+    void writeResistance(double resistance);
 
 private:
 
-    uint16_t getLongCommand(const uint8_t addr, const uint8_t cmd,
-                            const uint8_t val);
+    uint8_t get_command_byte(const uint8_t addr, const uint8_t cmd);
+    void write_byte(uint8_t val);
 
     /**
      * Slave select pin for this particular resistor. Note that this pin must
@@ -60,9 +59,10 @@ private:
      */
 
     /**
-     * This particular part has 256 steps of resistance.
+     * This particular part has 256 steps of resistance, over 0 to 10K Ohms
      */
     const int NUM_STEPS = 256;
+    const double MAX_RESISTANCE = 10e3; // Ohms
 
     /**
      * The addresss of the volatile memory which sets the rheostat wiper. See
@@ -80,6 +80,13 @@ private:
     const uint8_t CMD_WRITE = 0x00;
     const uint8_t CMD_INC   = 0x01;
     const uint8_t CMD_DEC   = 0x02;
+
+    /**
+     * SPI Settings for this device.
+     */
+    const int MAX_SCLK_FREQUENCY = 10e6;
+    const SPISettings SPI_SETTINGS = SPISettings(
+        MAX_SCLK_FREQUENCY, MSBFIRST, SPI_MODE3);
 
 };
 
