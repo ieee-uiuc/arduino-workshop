@@ -74,7 +74,7 @@ public:
      * Minimum and Maxium frequency cutoffs in Hz. These are put in the audio
      * range to make changes easy to hear.
      */
-    const double MAX_FREQ_CUTOFF = 1e3;
+    const double MAX_FREQ_CUTOFF = 2e3;
     const double MIN_FREQ_CUTOFF = 0;
 
 private:

@@ -15,7 +15,7 @@
 /**
  * Frequency stepping constants.
  */
-const double num_freq_steps = 10;
+const double num_freq_steps = 20;
 const double freq_percentage = 1/num_freq_steps;
 
 
@@ -39,7 +39,7 @@ uint8_t button_state = 0x00;
  */
 bool debounced = true;
 int debouncing_timout = 0;
-const int MAX_DEBOUNCING_TIMEOUT = 100;
+const int MAX_DEBOUNCING_TIMEOUT = 500;
 
 
 void setup()
@@ -66,11 +66,11 @@ void loop()
         /*
          * Increase the cutoff.
          */
-        HPF_cutoff += freq_percentage * shield.MAX_FREQ_CUTOFF;
-        HPF_cutoff = min(HPF_cutoff, shield.MAX_FREQ_CUTOFF);
-        shield.setHighPassCutoffFrequency(HPF_cutoff);
+        LPF_cutoff += freq_percentage * shield.MAX_FREQ_CUTOFF;
+        LPF_cutoff = min(LPF_cutoff, shield.MAX_FREQ_CUTOFF);
+        shield.setLowPassCutoffFrequency(LPF_cutoff);
         Serial.print("New cutoff frequency: ");
-        Serial.println(HPF_cutoff);
+        Serial.println(LPF_cutoff);
         debounced = false;
     }
     else if (debounced && button_state == 0x02)
@@ -78,11 +78,11 @@ void loop()
         /*
          * Decrease the cutoff.
          */
-        HPF_cutoff -= freq_percentage * shield.MAX_FREQ_CUTOFF;
-        HPF_cutoff = max(HPF_cutoff, shield.MIN_FREQ_CUTOFF);
+        LPF_cutoff -= freq_percentage * shield.MAX_FREQ_CUTOFF;
+        LPF_cutoff = max(LPF_cutoff, shield.MIN_FREQ_CUTOFF);
         Serial.print("New cutoff frequency: ");
-        Serial.println(HPF_cutoff);
-        shield.setHighPassCutoffFrequency(HPF_cutoff);
+        Serial.println(LPF_cutoff);
+        shield.setLowPassCutoffFrequency(LPF_cutoff);
         debounced = false;
     }
     else if (button_state == 0x00)
