@@ -23,22 +23,18 @@ void setup() {
 void loop() {
   // store the value read from pin 0 into a variable
   int sensorValue = analogRead(0);
-  //Serial.print(sensorValue);
+  //Serial.println(sensorValue);
   
   // if the piezo sensor detects a touch, move the servo
   if(sensorValue < 10) {
-    //Serial.print(pos);
+    //Serial.println(pos);
     
     // if the servo position is already at its maximum, reset the servo's position
-    if(pos > 300) {
-      pos = 0;
+    for (pos = 0; pos < 360; ++pos)
+    {
+      pos++;
       servo.write(pos);
-      delay(50);
+      delay(15);
     }
-    
-    // increment the position by 1
-    pos++;
-    servo.write(pos);
-    delay(15);
   }
 }
