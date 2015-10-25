@@ -1,5 +1,5 @@
 /*
- * Filter Class
+ * Shield Class
  * Kashev Dalmia - kashev.dalmia@gmail.com
  *
  * IEEE Arduino Workshop
