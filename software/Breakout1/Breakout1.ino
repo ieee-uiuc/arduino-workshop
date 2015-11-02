@@ -1,6 +1,5 @@
 // This program controls a servo using a Piezo sensor
-// If the Arduino detects movement from the Piezo sensor, rotate the servo
-// If the servo hits its maximum position (360ish), reset the servo position to 0 and continue onwards
+// If the Arduino detects movement from the Piezo sensor, rotate the servo from 0 to 180.
 
 // import the Servo library from Arduino
 #include <Servo.h>
@@ -23,16 +22,15 @@ void setup() {
 void loop() {
   // store the value read from pin 0 into a variable
   int sensorValue = analogRead(0);
-  //Serial.println(sensorValue);
+  // Serial.println(sensorValue);
   
   // if the piezo sensor detects a touch, move the servo
   if(sensorValue < 10) {
-    //Serial.println(pos);
+    // Serial.println(pos);
     
-    // if the servo position is already at its maximum, reset the servo's position
-    for (pos = 0; pos < 360; ++pos)
+    // gradually move servo from position 0 to position 180
+    for (pos = 0; pos < 180; ++pos)
     {
-      pos++;
       servo.write(pos);
       delay(15);
     }
